@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>RANDAO Mobile</title>
+
+    <link href="{{ url_for('static', filename='css/materialize.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/home_styles.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<body>
+<nav>
+    <div class="nav-wrapper blue darken-3">
+        <a href="{{ url_for('homepage') }}" class="brand-logo title-style">RANDAO Mobile</a>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        {% with messages = get_flashed_messages() %} {% if messages %}
+            <ul class="flashes col s12">
+                {% for message in messages %}
+                    <li>
+                        <p class="small-font center">{{ message }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %} {% endwith %}
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card deep-orange darken-2">
+                <div class="card-content white-text">
+                    <span class="card-title"><p class="small-font"> DAO Interface </p></span>
+                    <p class="very-small-font"><strong>Random Number Hash</strong> : {{ hash }}</p>
+                    <p class="very-small-font"><strong>Seed</strong> : {{ number }} </p>
+                </div>
+                <div class="card-action">
+                    <a href="{{ url_for('send_sha3') }}">Send SHA3</a>
+                    <a href="{{ url_for('send_seed') }}">Send Seed</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <div class="card deep-orange darken-2">
+                <div class="card-content white-text">
+                    {% if prev_rand != 0 %}
+                        <span class="card-title white-text"> <p class="small-font">Random Number from DAO </p></span>
+                        <p class="very-small-font"> <strong>Number</strong> : {{ prev_rand }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
